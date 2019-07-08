@@ -3,6 +3,13 @@ body {
     padding: 1em;
     max-width: 1080px;
     margin: auto;
+    background: url(https://www.freepik.com/free-vector/abstract-low-poly-lines-mesh-white-background_3867112.htm);
+    background-size: cover;
+    background-position: center;
+}
+
+html {
+    height: 100%;
 }
 
 a {
@@ -10,7 +17,10 @@ a {
 }
 
 h1 {
-    text-align: center;
+    text-align: center;          
+}
+
+h2 {
 }
 
 ul {
