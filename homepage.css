@@ -18,6 +18,7 @@ a {
 
 h1 {
     text-align: center;
+    padding-top: .5rem;
 }
 
 h2 {
@@ -39,5 +40,17 @@ li {
 }
 
 .card-img-top {
-    height: 65%;
+    height: 69%;
+}
+
+.card-body {
+    height: 31%;
+}
+
+#feed {
+    margin-bottom: -15px;
+}
+
+.col-lg-4 {
+    margin-bottom: -45px;
 }
