@@ -12,12 +12,15 @@
     </head>
     <body>
         <div class="container">
+            <nav class="nav justify-content-end">
+                    <a class="nav-link font-weight-bold" href="#">Login / Sign Up</a>
+            </nav>
             <h1 class="display-4 font-weight-bold">LOBBY.IO</h1>
         	<div class="row">
         		<h2>FEED</h2>
         		<div class="row" id="feed">
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
     		                <img class="card-img-top" src="https://www.mobygames.com/images/shots/l/604759-doom-game-boy-advance-screenshot-classic-doom-monster-one.png">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.youtube.com/watch?v=FQ1fJbYhbVQ">Interesting Findings About Doom's Monster Sprites</a></h5>
@@ -25,7 +28,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
                             <img class="card-img-top" src="https://cdn2.unrealengine.com/Fortnite%2Fpatch-notes%2Fv9-01%2Fbr-header-v9-01%2F00BR_Weapon-TacticalAssaultRifle_Social-%281%29-1920x1080-5ce8461cb28de23166b991fc38967aa846148fbe.jpg">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.epicgames.com/fortnite/en-US/patch-notes/v7-30">Fortnite 9.01 Update</a></h5>
@@ -33,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
                             <img class="card-img-top" src="https://i.ytimg.com/vi/AZaWKkpi0TU/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA-SvnnZSqd4H_r_P3hFk2BGgOb3w">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.youtube.com/watch?v=AZaWKkpi0TU">Far Cry 3: Blood Dragon's A.J.M. 9 in CS:GO</a></h5>
@@ -41,7 +44,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
     		                <img class="card-img-top" src="https://assets1.ignimgs.com/2018/10/23/huntshowdownnewmap-1280-1540268716525.jpg">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.youtube.com/watch?v=1KpteSXDItU">Hunt: Showdown's Unique Sound Feature</a></h5>
@@ -49,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
                             <img class="card-img-top" src="https://cdn.vox-cdn.com/thumbor/aPPUTp6Y-R5wOPZIkXRKQtU5kX0=/0x0:1440x809/1200x800/filters:focal(605x290:835x520)/cdn.vox-cdn.com/uploads/chorus_image/image/63972470/iwo_jima_2.0.jpg">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.youtube.com/watch?v=2h8xrjW_qdE">BFV Pacific Theater Update: First Look</a></h5>
@@ -57,7 +60,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="card h-75 shadow">
+                        <div class="card h-75 shadow-sm">
                             <img class="card-img-top" src="https://i.ytimg.com/vi/paBYTKZZS5s/maxresdefault.jpg">
                             <div class="card-body">
                                 <h5 class="card-title text-truncate"><a href="https://www.youtube.com/watch?v=0YgZeeyqpzg">Battallion 1944: Eastern Front</a></h5>
@@ -67,9 +70,10 @@
                 </div>
             </div>
         <hr>
-    	<div class="row">
-            <div>
-                <h2>STREAMS</h2>
+        <div class="row align-items-start mb-2">
+            <h2>STREAMS</h2>
+        </div>
+    	<div class="row d-flex flex-column align-items-center">
                 <!-- Add a placeholder for the Twitch embed -->
                 <div id="twitch-embed"></div>
 
@@ -84,7 +88,6 @@
                     channel: "siritron"
                   });
                 </script>
-            </div>
         </div>
         <hr>
         <div class="row">
