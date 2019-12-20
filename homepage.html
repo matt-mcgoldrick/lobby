@@ -7,7 +7,6 @@
     	<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>lobby.io</title>
-        <script src="script.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="homepage.css">
     </head>
@@ -52,7 +51,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <a href="https://www.youtube.com/watch?v=1KpteSXDItU">
-                            <div class="card h-75 shadow-sm">
+                            <div class="card h-75 shadow">
                                 <img class="card-img-top" src="https://assets1.ignimgs.com/2018/10/23/huntshowdownnewmap-1280-1540268716525.jpg">
                                 <div class="card-body">
                                     <h5 class="card-title text-truncate">Hunt: Showdown's Unique Sound Feature</h5>
@@ -62,7 +61,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <a href="https://www.youtube.com/watch?v=2h8xrjW_qdE">
-                            <div class="card h-75 shadow-sm">
+                            <div class="card h-75 shadow">
                                 <img class="card-img-top" src="https://cdn.vox-cdn.com/thumbor/aPPUTp6Y-R5wOPZIkXRKQtU5kX0=/0x0:1440x809/1200x800/filters:focal(605x290:835x520)/cdn.vox-cdn.com/uploads/chorus_image/image/63972470/iwo_jima_2.0.jpg">
                                 <div class="card-body">
                                     <h5 class="card-title text-truncate">BFV Pacific Theater Update: First Look</h5>
@@ -72,7 +71,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4">
                         <a href="https://www.youtube.com/watch?v=0YgZeeyqpzg">
-                            <div class="card h-75 shadow-sm">
+                            <div class="card h-75 shadow">
                                 <img class="card-img-top" src="https://i.ytimg.com/vi/paBYTKZZS5s/maxresdefault.jpg">
                                 <div class="card-body">
                                     <h5 class="card-title text-truncate">Battallion 1944: Eastern Front</h5>
@@ -86,22 +85,7 @@
         <div class="row align-items-start mb-2">
             <h2>STREAMS</h2>
         </div>
-    	<div class="row d-flex flex-column align-items-center">
-                <!-- Add a placeholder for the Twitch embed -->
-                <div id="twitch-embed"></div>
-
-                <!-- Load the Twitch embed script -->
-                <script src="https://embed.twitch.tv/embed/v1.js"></script>
-
-                <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
-                <script type="text/javascript">
-                  new Twitch.Embed("twitch-embed", {
-                    width: 854,
-                    height: 480,
-                    channel: "siritron"
-                  });
-                </script>
-        </div>
+        <!--Twitch embed goes here-->
         <hr>
         <div class="row">
             <div>
@@ -134,6 +118,7 @@
     	</div>
         <hr>
     </div>
+        <script src="homepage.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
