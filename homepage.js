@@ -25,6 +25,7 @@ window.addEventListener("resize", function () {
     }
 });
 
+// Component for adding shadow to cards as part of hover animation
 $(".card").hover(
     function() {
         $(this).addClass("shadow-lg");
