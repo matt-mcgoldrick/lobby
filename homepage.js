@@ -24,3 +24,11 @@ window.addEventListener("resize", function () {
         cardList[cardList.length - 3].classList.remove("shadow-sm");
     }
 });
+
+$(".card").hover(
+    function() {
+        $(this).addClass("shadow-lg");
+    }, function() {
+        $(this).removeClass("shadow-lg");
+    }
+);

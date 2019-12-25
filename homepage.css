@@ -57,6 +57,9 @@ a {
     color: black;
 }
 
-a:hover {
-  text-decoration: none;
+.card:hover {
+    transform: translate(3px, -3px);
+    -webkit-transition: transform 0.25s ease-out;
+    -moz-transition: transform 0.25s ease-out;
+    -o-transition: transform 0.25s ease-out;
 }
