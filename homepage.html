@@ -9,6 +9,8 @@
         <title>lobby.io</title>
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="homepage.css">
+        <!-- Bootstrap Font Awesome -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- jQuery -->
         <script type="text/javascript" src="lib/jquery-3.4.1.min.js"></script>
 
@@ -86,7 +88,49 @@
             </div>
         <hr>
         <div class="row align-items-start mb-2">
-            <h2>STREAMS</h2>
+            <div class="col-sm-6">
+                <h2>STREAMS</h2>
+            </div>
+            <div class="col-sm-6">
+                <h2>DEV</h2>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Keeping this here in case I ever want to justify these items horizontally instead
+            <div class="col-md-2 streamer" id="streamer1">
+                <i class="fa fa-twitch fa-10x"></i>  
+            </div>     
+            <div class="col-md-2 streamer" id="streamer2">
+                <i class="fa fa-twitch fa-10x"></i>  
+            </div>      
+            <div class="col-md-2 streamer" id="streamer3">
+                <i class="fa fa-twitch fa-10x"></i>  
+            </div> 
+            -->
+            <div class="col-md-6">
+                <div class="row streamer d-flex justify-content-around">
+                    <i class="fa fa-twitch fa-10x" id="streamerIcon1"></i> 
+                    <span id="streamerName1">siritron</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                </div> 
+                <div class="row streamer d-flex justify-content-around">
+                    <i class="fa fa-twitch fa-10x" id="streamerIcon2"></i> 
+                    <span id="streamerName2">xcaliz0rz</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                </div> 
+                <div class="row streamer d-flex justify-content-around">
+                    <i class="fa fa-twitch fa-10x" id="streamerIcon3"></i> 
+                    <span id="streamerName3">pestily</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                </div>  
+            </div>   
+            <div class="col-md-6" id="dev">
+                <a class="twitter-timeline" 
+                  href="https://twitter.com/TwitterDev/lists/national-parks?ref_src=twsrc%5Etfw"
+                  data-height="400">
+                  A Twitter List by TwitterDev</a> 
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>   
         </div>
         <!--Twitch embed goes here-->
         <hr>
@@ -102,18 +146,8 @@
                 </div>
             </div>
     	</div>
-    <hr>
-    	<div class="row">
-        	<div>
-                <h2>DEV</h2>
-                <a class="twitter-timeline"
-                  href="https://twitter.com/twitter/lists/official-twitter-accts">
-                Tweets from https://twitter.com/twitter/lists/official-twitter-accts
-                </a>
-            </div>
-        </div>
-    <hr>
-    	<div class="row">
+        <hr>
+        <div class="row">
             <div>
                 <h2>OST OF THE WEEK</h2>
                 <a href="https://www.youtube.com/watch?v=Ztc5oZ0_b8k&list=PLBVCk8lHLMaWzsYa090H78ELUsbtNnKwf&index=15">Travis Strikes Again</a>

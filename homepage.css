@@ -59,6 +59,11 @@ a {
 
 a:hover {
     text-decoration: none;
+    color: black;
+}
+
+nav a:first-of-type:hover {
+    color:blue;
 }
 
 .card:hover {
@@ -66,4 +71,19 @@ a:hover {
     -webkit-transition: transform 0.25s ease-out;
     -moz-transition: transform 0.25s ease-out;
     -o-transition: transform 0.25s ease-out;
+}
+
+#dev {
+    border-left: 1px solid lightgray;
+}
+
+.streamer {
+    font-size: 75px;
+    text-align: center;
+    height: 33%;
+    align-items: center;
+}
+
+span {
+    font-size: 34px;
 }
