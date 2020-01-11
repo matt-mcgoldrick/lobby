@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- jQuery -->
         <script type="text/javascript" src="lib/jquery-3.4.1.min.js"></script>
-
     </head>
     <body>
         <div class="container">
@@ -96,32 +95,24 @@
             </div>
         </div>
         <div class="row">
-            <!-- Keeping this here in case I ever want to justify these items horizontally instead
-            <div class="col-md-2 streamer" id="streamer1">
-                <i class="fa fa-twitch fa-10x"></i>  
-            </div>     
-            <div class="col-md-2 streamer" id="streamer2">
-                <i class="fa fa-twitch fa-10x"></i>  
-            </div>      
-            <div class="col-md-2 streamer" id="streamer3">
-                <i class="fa fa-twitch fa-10x"></i>  
-            </div> 
-            -->
             <div class="col-md-6">
                 <div class="row streamer d-flex justify-content-around">
-                    <i class="fa fa-twitch fa-10x" id="streamerIcon1"></i> 
-                    <span id="streamerName1">siritron</span>
-                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                    <i class="fa fa-twitch fa-10x" id="streamerIcon1"></i>
+                    <input type="text" id="streamerNameInput1" class="d-none"> 
+                    <span id="streamerName1" class="">siritron</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton1">Edit</button>
                 </div> 
                 <div class="row streamer d-flex justify-content-around">
                     <i class="fa fa-twitch fa-10x" id="streamerIcon2"></i> 
-                    <span id="streamerName2">xcaliz0rz</span>
-                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                    <input type="text" id="streamerNameInput2" class="d-none">
+                    <span id="streamerName2" class="">xcaliz0rz</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton2">Edit</button>
                 </div> 
                 <div class="row streamer d-flex justify-content-around">
                     <i class="fa fa-twitch fa-10x" id="streamerIcon3"></i> 
-                    <span id="streamerName3">pestily</span>
-                    <button type="button" class="btn btn-outline-secondary mr-3">Edit</button>
+                    <input type="text" id="streamerNameInput3" class="d-none">
+                    <span id="streamerName3" class="">pestily</span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton3">Edit</button>
                 </div>  
             </div>   
             <div class="col-md-6" id="dev">
@@ -132,7 +123,6 @@
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>   
         </div>
-        <!--Twitch embed goes here-->
         <hr>
         <div class="row">
             <div>

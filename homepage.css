@@ -87,3 +87,7 @@ nav a:first-of-type:hover {
 span {
     font-size: 34px;
 }
+
+input {
+    font-size: 25px;
+}
