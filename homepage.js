@@ -2,6 +2,9 @@ var cardList = document.querySelectorAll(".card");
 var editButton1 = document.querySelector("#editButton1");
 var editButton2 = document.querySelector("#editButton2");
 var editButton3 = document.querySelector("#editButton3");
+var saveButton1 = document.querySelector("#saveButton1");
+var saveButton2 = document.querySelector("#saveButton2");
+var saveButton3 = document.querySelector("#saveButton3");
 var streamerNameInput1 = document.querySelector("#streamerNameInput1");
 var streamerNameInput2 = document.querySelector("#streamerNameInput2");
 var streamerNameInput3 = document.querySelector("#streamerNameInput3");
@@ -15,7 +18,7 @@ var streamerList = [];
 var editButtonList = $(".edit");
 
 class Streamer {
-    constructor(url, isLive, name, _icon, _span, _edit, _input)
+    constructor(url, isLive, name, _icon, _span, _edit, _save, _input)
     {
         this.url = url;
         this.isLive = isLive;
@@ -23,7 +26,13 @@ class Streamer {
         this._icon = _icon;
         this._span = _span;
         this._edit = _edit;
+        this._save = _save;
         this._input = _input;
+    }
+
+    // function that is called when editing a streamer
+    editStreamer(name) {
+        this.name = name;
     }
 }
 
@@ -92,32 +101,43 @@ function dynamicInputs() {
     }
 }
 
-streamerNameInput1.addEventListener("input", function(input) {
-    userInputUrl = input.value;
-});
-
 // Listen for user to click any of the edit buttons and accept user input
-$(".edit").on( "click", function() {
-    var editbuttons = $(this);
+$(".edit").on("click", function() {
+    console.log("here1");
+    var editbutton = $(this);
     streamerList.forEach(function(strmr) {
-        if(strmr._edit.id == editbuttons.attr('id')) {
+        if(strmr._edit.id == editbutton.attr('id')) {
             strmr._span.classList.add("d-none");
             strmr._input.classList.remove("d-none");
-            strmr.editStreamer(_input.value);
+            strmr._save.classList.remove("d-none");
         }
     });
+    editbutton.addClass("d-none");
+});
+
+$(".save").on("click", function() {
+    console.log("here");
+    var savebutton = $(this);
+    streamerList.forEach(function(strmr) {
+        console.log("here");
+        if(strmr._save.id == savebutton.attr('id')) {
+            strmr._save.classList.add("d-none");
+            strmr._span.classList.remove("d-none");
+            strmr._edit.classList.remove("d-none");
+            strmr._input.classList.add("d-none");
+            strmr.editStreamer(strmr._input.value);
+        }
+    });
+    savebutton.addClass("d-none");
 });
 
 // function that is called when adding a streamer
-function addStreamer(url, icon, name, _icon, _span, _edit, _input) {
-    var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _input);
+function addStreamer(url, icon, name, _icon, _span, _edit, _save, _input) {
+    var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _save, _input);
     streamerList.push(streamer);
 }
+    
 
-// function that is called when editing a streamer
-function editStreamer(url) {
-    this.url = url;
-}
 
 // Add shadow to cards as component of hover animation
 $(".card").hover(
@@ -134,7 +154,7 @@ function getStreamerInfo() {
 }
 
 function init() {
-    addStreamer("https://www.twitch.tv/siritron", false, "siritron", streamerIcon1, streamerName1, editButton1, streamerNameInput1);
-    addStreamer("https://www.twitch.tv/xcaliz0rz", true, "xcaliz0rz", streamerIcon2, streamerName2, editButton2, streamerNameInput2);
-    addStreamer("https://www.twitch.tv/pestily", false, "pestily", streamerIcon3, streamerName3, editButton3, streamerNameInput3);
+    addStreamer("https://www.twitch.tv/siritron", false, "siritron", streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1);
+    addStreamer("https://www.twitch.tv/xcaliz0rz", true, "xcaliz0rz", streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2);
+    addStreamer("https://www.twitch.tv/pestily", false, "pestily", streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3);
 }
