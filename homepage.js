@@ -33,6 +33,8 @@ class Streamer {
     // function that is called when editing a streamer
     editStreamer(name) {
         this.name = name;
+        this.url = "https://www.twitch.tv/" + name;
+        this._span.textContent = name;
     }
 }
 
@@ -103,7 +105,6 @@ function dynamicInputs() {
 
 // Listen for user to click any of the edit buttons and accept user input
 $(".edit").on("click", function() {
-    console.log("here1");
     var editbutton = $(this);
     streamerList.forEach(function(strmr) {
         if(strmr._edit.id == editbutton.attr('id')) {
@@ -116,10 +117,8 @@ $(".edit").on("click", function() {
 });
 
 $(".save").on("click", function() {
-    console.log("here");
     var savebutton = $(this);
     streamerList.forEach(function(strmr) {
-        console.log("here");
         if(strmr._save.id == savebutton.attr('id')) {
             strmr._save.classList.add("d-none");
             strmr._span.classList.remove("d-none");
