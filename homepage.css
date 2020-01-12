@@ -89,5 +89,13 @@ span {
 }
 
 input {
-    font-size: 25px;
+    font-size: 250px;
+}
+
+.fa-music {
+    margin-left: 3rem;
+}
+
+#album:hover {
+    color: blue;
 }
