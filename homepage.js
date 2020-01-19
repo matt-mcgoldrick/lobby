@@ -14,11 +14,14 @@ var streamerName3 = document.querySelector("#streamerName3");
 var streamerIcon1 = document.querySelector("#streamerIcon1");
 var streamerIcon2 = document.querySelector("#streamerIcon2");
 var streamerIcon3 = document.querySelector("#streamerIcon3");
+var iconLink1 = document.querySelector("#iconLink1");
+var iconLink2 = document.querySelector("#iconLink2");
+var iconLink3 = document.querySelector("#iconLink3");
 var streamerList = [];
 var editButtonList = $(".edit");
 
 class Streamer {
-    constructor(url, isLive, name, _icon, _span, _edit, _save, _input)
+    constructor(url, isLive, name, _icon, _span, _edit, _save, _input, _link)
     {
         this.url = url;
         this.isLive = isLive;
@@ -28,6 +31,9 @@ class Streamer {
         this._edit = _edit;
         this._save = _save;
         this._input = _input;
+        this._link = _link
+
+        this._link.setAttribute("href", this.url);
     }
 
     // function that is called when editing a streamer
@@ -35,6 +41,7 @@ class Streamer {
         this.name = name;
         this.url = "https://www.twitch.tv/" + name;
         this._span.textContent = name;
+        this._link.setAttribute("href", this.url);
     }
 }
 
@@ -116,6 +123,7 @@ $(".edit").on("click", function() {
     editbutton.addClass("d-none");
 });
 
+// Clicking on save button removes the  
 $(".save").on("click", function() {
     var savebutton = $(this);
     streamerList.forEach(function(strmr) {
@@ -131,12 +139,10 @@ $(".save").on("click", function() {
 });
 
 // function that is called when adding a streamer
-function addStreamer(url, icon, name, _icon, _span, _edit, _save, _input) {
-    var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _save, _input);
+function addStreamer(url, icon, name, _icon, _span, _edit, _save, _input, _link) {
+    var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _save, _input, _link);
     streamerList.push(streamer);
 }
-    
-
 
 // Add shadow to cards as component of hover animation
 $(".card").hover(
@@ -153,7 +159,7 @@ function getStreamerInfo() {
 }
 
 function init() {
-    addStreamer("https://www.twitch.tv/siritron", false, "siritron", streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1);
-    addStreamer("https://www.twitch.tv/xcaliz0rz", true, "xcaliz0rz", streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2);
-    addStreamer("https://www.twitch.tv/pestily", false, "pestily", streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3);
+    addStreamer("https://www.twitch.tv/siritron", false, "siritron", streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
+    addStreamer("https://www.twitch.tv/xcaliz0rz", true, "xcaliz0rz", streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
+    addStreamer("https://www.twitch.tv/pestily", false, "pestily", streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
 }
