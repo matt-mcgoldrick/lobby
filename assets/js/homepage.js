@@ -138,6 +138,22 @@ $(".save").on("click", function() {
     savebutton.addClass("d-none");
 });
 
+$("input").on("keypress", function(e) {
+    if(e.which === 13) {
+        var savebutton = $(this).siblings(".save");
+        streamerList.forEach(function(strmr) {
+            if(strmr._save.id == savebutton.attr('id')) {
+                strmr._save.classList.add("d-none");
+                strmr._span.classList.remove("d-none");
+                strmr._edit.classList.remove("d-none");
+                strmr._input.classList.add("d-none");
+                strmr.editStreamer(strmr._input.value);
+            }
+        });
+        savebutton.addClass("d-none");
+    }
+});
+
 // function that is called when adding a streamer
 function addStreamer(url, icon, name, _icon, _span, _edit, _save, _input, _link) {
     var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _save, _input, _link);
