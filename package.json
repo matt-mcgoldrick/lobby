@@ -1,0 +1,23 @@
+{
+  "name": "lobby",
+  "version": "1.0.0",
+  "description": "lobby.io is a somewhat-curated aggregate site for FPS and BR related news.  Load it up between matches to catch up on recent announcements, read developer tweets, peek at the latest patch notes for your game of choice, and SO MUCH MORE",
+  "main": "lobby.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtmcgoldrick/lobby.git"
+  },
+  "author": "Matt McGoldrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtmcgoldrick/lobby/issues"
+  },
+  "homepage": "https://github.com/mtmcgoldrick/lobby#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}
