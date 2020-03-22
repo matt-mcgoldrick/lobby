@@ -21,11 +21,11 @@ var streamerList = [];
 var editButtonList = $(".edit");
 
 class Streamer {
-    constructor(url, isLive, name, _icon, _span, _edit, _save, _input, _link)
+    constructor(url, name, isLive, _icon, _span, _edit, _save, _input, _link)
     {
         this.url = url;
-        this.isLive = isLive;
         this.name = name;
+        this.isLive = isLive;
         this._icon = _icon;
         this._span = _span;
         this._edit = _edit;
@@ -155,8 +155,8 @@ $("input").on("keypress", function(e) {
 });
 
 // function that is called when adding a streamer
-function addStreamer(url, icon, name, _icon, _span, _edit, _save, _input, _link) {
-    var streamer = new Streamer(url, icon, name, _icon, _span, _edit, _save, _input, _link);
+function addStreamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link) {
+    var streamer = new Streamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link);
     streamerList.push(streamer);
 }
 
@@ -169,13 +169,32 @@ $(".card").hover(
     }
 );
 
-function getStreamerInfo() {  
-    $.get("https://www.twitch.tv/siritron", function(){
-    });
+const options = {
+    url: 'https://api.twitch.tv/helix/streams?user_login=siritron',
+    headers: {
+        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
+    }    
+};
+
+function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+            const info = JSON.parse(body);
+            console.log(info.data.type);
+            return info.data.type;
+        }
+}
+
+function checkIfLive(strmr) {
+    var isLive = false;
+    if (request(options, callback) == "live")
+    {
+        isLive = true;
+    }
+    return isLive;
 }
 
 function init() {
-    addStreamer("https://www.twitch.tv/siritron", false, "siritron", streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
-    addStreamer("https://www.twitch.tv/xcaliz0rz", true, "xcaliz0rz", streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
-    addStreamer("https://www.twitch.tv/pestily", false, "pestily", streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
+    addStreamer("https://www.twitch.tv/siritron", "siritron", checkIfLive("siritron"), streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
+    addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", checkIfLive("xcaliz0rz"), streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
+    addStreamer("https://www.twitch.tv/pestily", "pestily", checkIfLive("pestily"), streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
 }
