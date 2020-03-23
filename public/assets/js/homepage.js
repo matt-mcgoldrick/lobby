@@ -169,32 +169,8 @@ $(".card").hover(
     }
 );
 
-const options = {
-    url: 'https://api.twitch.tv/helix/streams?user_login=siritron',
-    headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
-    }    
-};
-
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-            const info = JSON.parse(body);
-            console.log(info.data.type);
-            return info.data.type;
-        }
-}
-
-function checkIfLive(strmr) {
-    var isLive = false;
-    if (request(options, callback) == "live")
-    {
-        isLive = true;
-    }
-    return isLive;
-}
-
 function init() {
-    addStreamer("https://www.twitch.tv/siritron", "siritron", checkIfLive("siritron"), streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
-    addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", checkIfLive("xcaliz0rz"), streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
-    addStreamer("https://www.twitch.tv/pestily", "pestily", checkIfLive("pestily"), streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
+    addStreamer("https://www.twitch.tv/siritron", "siritron", true, streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
+    addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", false, streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
+    addStreamer("https://www.twitch.tv/pestily", "pestily", true, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
 }
