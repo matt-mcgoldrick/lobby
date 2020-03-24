@@ -6,7 +6,8 @@ app.use('/public', express.static("public"));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
-    res.render("homepage");
+    var liveState = [{ liveStatus :"color:red"}];
+    res.render("homepage", {liveState: liveState});
 });
 
 app.get("/about", function(req, res) {
@@ -16,6 +17,13 @@ app.get("/about", function(req, res) {
 app.get("/blog", function(req, res) {
     res.render("blog");
 });
+
+class streamerIcon {
+    constructor(iconElement, isLive) {
+        this.iconElement = iconElement;
+        this.isLive = isLive;
+    }
+}
 
 const options = {
     url: 'https://api.twitch.tv/helix/streams?user_login=siritron',
@@ -32,7 +40,7 @@ function callback(error, response, body) {
         }
 }
 
-function checkIfLive(strmr) {
+function checkIfLive() {
     var isLive = false;
     if (request(options, callback) == "live")
     {
