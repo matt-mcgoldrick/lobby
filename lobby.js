@@ -5,9 +5,27 @@ var app = express();
 app.use('/public', express.static("public"));
 app.set("view engine", "ejs");
 
+var streamerLogins = ["siritron", "xcaliz0rz", "pestily"];
+var liveStates = [];
+
+function checkIfLive(){
+    streamerLogins.forEach(function(strLogin){
+        options.url = 'https://api.twitch.tv/helix/streams?user_login=' + strLogin;
+        request(options, callback);
+    });
+}
+
+const options = {
+    url: "",
+    headers: {
+        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
+    }    
+};
+
+checkIfLive();
+
 app.get("/", function(req, res) {
-    var liveState = [{ liveStatus :"color:red"}];
-    res.render("homepage", {liveState: liveState});
+    res.render("homepage", {liveState: liveStates}); //code that depends on liveStates
 });
 
 app.get("/about", function(req, res) {
@@ -25,28 +43,18 @@ class streamerIcon {
     }
 }
 
-const options = {
-    url: 'https://api.twitch.tv/helix/streams?user_login=siritron',
-    headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
-    }    
-};
-
 function callback(error, response, body) {
+    var liveState = {};
     if (!error && response.statusCode == 200) {
-            const info = JSON.parse(body);
-            console.log(info.data.type);
-            return info.data.type;
+        const info = JSON.parse(body);
+        if (info.data.length !== 0) {
+            liveState = { liveStatus :"color:red" };
         }
-}
-
-function checkIfLive() {
-    var isLive = false;
-    if (request(options, callback) == "live")
-    {
-        isLive = true;
+        else {
+            liveState = { liveStatus :"color:none" };
+        }
+        liveStates.push(liveState);
     }
-    return isLive;
 }
 
 var port = process.env.PORT || 3000;
