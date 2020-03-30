@@ -136,6 +136,7 @@ $(".save").on("click", function() {
         }
     });
     savebutton.addClass("d-none");
+    window.location.reload();
 });
 
 $("input").on("keypress", function(e) {
