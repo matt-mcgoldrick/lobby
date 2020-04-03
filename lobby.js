@@ -36,6 +36,10 @@ app.get("/blog", function(req, res) {
     res.render("blog");
 });
 
+app.get("/blog/:postNumber", function(req, res) {
+    res.send("Post " + req.params.postNumber);
+});
+
 class streamerIcon {
     constructor(iconElement, isLive) {
         this.iconElement = iconElement;
