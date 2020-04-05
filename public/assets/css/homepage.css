@@ -62,7 +62,7 @@ a:hover {
     color: black;
 }
 
-nav a:first-of-type:hover {
+nav a:hover {
     color:blue;
 }
 
