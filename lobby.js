@@ -1,11 +1,14 @@
 var express = require("express");
 var request = require("request");
+var bodyParser = require('body-parser');
+
 var app = express();
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static("public"));
 app.set("view engine", "ejs");
 
-var streamerLogins = ["siritron", "xcaliz0rz", "pestily"];
+var streamerLogins = ["siritron", "xcaliz0rz", "cirno_tv"];
 var liveStates = [];
 
 function checkIfLive(){
@@ -25,7 +28,9 @@ const options = {
 checkIfLive();
 
 app.get("/", function(req, res) {
-    res.render("homepage", {liveState: liveStates}); //code that depends on liveStates
+    console.log(liveStates);
+    console.log(streamerLogins);
+    res.render("homepage", {liveState: liveStates, streamerLogins: streamerLogins}); //code that depends on liveStates
 });
 
 app.get("/about", function(req, res) {
@@ -39,6 +44,26 @@ app.get("/blog", function(req, res) {
 app.get("/blog/:postNumber", function(req, res) {
     res.send("Post " + req.params.postNumber);
 });
+
+app.post("/editstreamer1", function(req, res){
+    var newStreamer = req.body.newstreamer1;
+    streamerLogins[0] = newStreamer;
+    res.redirect("/");
+});
+
+app.post("/editstreamer2", function(req, res){
+    var newStreamer = req.body.newstreamer2;
+    streamerLogins[1] = newStreamer;
+    res.redirect("/");
+});
+
+app.post("/editstreamer3", function(req, res){
+    console.log(req.body);
+    var newStreamer = req.body.newstreamer3;
+    streamerLogins[2] = newStreamer;
+    res.redirect("/");
+});
+
 
 class streamerIcon {
     constructor(iconElement, isLive) {
