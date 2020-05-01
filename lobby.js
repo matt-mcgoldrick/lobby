@@ -1,12 +1,35 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require('body-parser');
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/lobby_io", { useNewUrlParser: true, useUnifiedTopology: true });
 
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static("public"));
 app.set("view engine", "ejs");
+
+var streamerSchema = new mongoose.Schema({
+    login: String,
+    url: String, 
+    isLive: Boolean
+});
+
+var Streamer = mongoose.model("Streamer", streamerSchema);
+
+Streamer.create({
+    login: "siritron",
+    url: "https://www.twitch.tv/siritron",
+    isLive: "true"
+}, function(err, str){
+    if(err){
+        console.log(err);
+    } else {
+        console.log(str);
+    }
+});
 
 var streamerLogins = ["siritron", "xcaliz0rz", "cirno_tv"];
 var liveStates = [];
@@ -89,4 +112,4 @@ function callback(error, response, body) {
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
     console.log("Enter through the lobby.")
-})
+});
