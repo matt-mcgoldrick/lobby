@@ -1,24 +1,24 @@
-var express = require("express"),
-    request = require("request"),
-    bodyParser = require('body-parser'),
-    mongoose = require("mongoose");
+const express = require("express"),
+      request = require("request"),
+      bodyParser = require('body-parser'),
+      mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27017/lobby_io", { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
 
-var app = express();
+const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/public', express.static("public"));
 app.set("view engine", "ejs");
 
-var streamerSchema = new mongoose.Schema({
+const streamerSchema = new mongoose.Schema({
     login: String,
     url: String, 
     isLive: Boolean
 });
 
-var Streamer = mongoose.model("Streamer", streamerSchema);
+const Streamer = mongoose.model("Streamer", streamerSchema);
 
 /* Streamer.create({
     login: "siritron",
@@ -122,8 +122,8 @@ app.get("/blog/:postNumber", function(req, res) {
 app.post("/editstreamer1", function(req, res){
     const str1 = req.body.newstreamer1;
     // Update streamer 1 in the db
-    let query = { num: 1 };
-    let options = { new: false};
+    const query = { num: 1 };
+    const options = { new: false};
     Streamer.findOneAndUpdate(query, { login: str1, url: "https://www.twitch.tv/" + str1 }, options, function(err, doc){
         if(err){
             console.log(err);
@@ -137,7 +137,7 @@ app.post("/editstreamer1", function(req, res){
 app.post("/editstreamer2", function(req, res){
     const str2 = req.body.streamer2;
     // Update streamer 2 in the db, redirect to / if the update succeeds 
-    var query = { num: '2' };
+    const query = { num: '2' };
     Streamer.findOneAndUpdate(query, { login: str2, url: "https://www.twitch.tv/" + str2 }, function(err, res){
         if(err){
             console.log(err);
@@ -150,7 +150,7 @@ app.post("/editstreamer2", function(req, res){
 app.post("/editstreamer3", function(req, res){
     const str3 = req.body.streamer3;
     // Update streamer 3 in the db
-    var query = { num: '3' };
+    const query = { num: '3' };
     Streamer.findOneAndUpdate(query, { login: str3, url: "https://www.twitch.tv/" + str3 }, function(err, res){
         if(err){
             console.log(err);
@@ -171,7 +171,7 @@ function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         const info = JSON.parse(body);
         if (info.data.length !== 0) {
-            var query = {login: this.uri.query.substr(11)};
+            const query = {login: this.uri.query.substr(11)};
             Streamer.findOneAndUpdate(query, {isLive: true}, function(err, str) {
                 if (err) {
                     console.log(err);
@@ -180,7 +180,7 @@ function callback(error, response, body) {
             });
         }
         else {
-            var query = {login: this.uri.query.substr(11)};
+            const query = {login: this.uri.query.substr(11)};
             Streamer.findOneAndUpdate(query, {isLive: false}, function(err, str) {
                 if (err) {
                     console.log(err);
