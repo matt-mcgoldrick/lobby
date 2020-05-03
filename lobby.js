@@ -76,16 +76,15 @@ const options = {
     }    
 };
 
-checkIfLive();
-
+// isLive logic not working + icon colors not changing
 app.get("/", function(req, res) {
     Streamer.find({}, function(err, str) {
         if(err) {
             console.log(err);
         } else {
-            let isLive1 = '';
-            let isLive2 = '';
-            let isLive3 = '';
+            let isLive1 = {};
+            let isLive2 = {};
+            let isLive3 = {};
             if(str[0].isLive == true){
                 isLive1 = { liveStatus :"color:red" }
             } else {
@@ -101,8 +100,12 @@ app.get("/", function(req, res) {
             } else {
                 isLive3 = { liveStatus :"color:none" }
             }
+            console.log(isLive1);
+            console.log(isLive2);
+            console.log(isLive3);
+            checkIfLive();
             res.render("homepage", {streamer1: str[0].login, streamer2: str[1].login, streamer3: str[2].login, 
-                isLive1: isLive1, isLive2: isLive2, isLive3: isLive3});
+                isLive1: isLive1.liveStatus, isLive2: isLive2.liveStatus, isLive3: isLive3.liveStatus});
         }
     });
 });
@@ -121,9 +124,8 @@ app.get("/blog/:postNumber", function(req, res) {
 
 app.post("/editstreamer1", function(req, res){
     const str1 = req.body.newstreamer1;
-    // Update streamer 1 in the db
     const query = { num: 1 };
-    const options = { new: false};
+    const options = { new: true};
     Streamer.findOneAndUpdate(query, { login: str1, url: "https://www.twitch.tv/" + str1 }, options, function(err, doc){
         if(err){
             console.log(err);
@@ -135,26 +137,28 @@ app.post("/editstreamer1", function(req, res){
 });
 
 app.post("/editstreamer2", function(req, res){
-    const str2 = req.body.streamer2;
-    // Update streamer 2 in the db, redirect to / if the update succeeds 
-    const query = { num: '2' };
-    Streamer.findOneAndUpdate(query, { login: str2, url: "https://www.twitch.tv/" + str2 }, function(err, res){
+    const str2 = req.body.newstreamer2;
+    const query = { num: 2 };
+    const options = { new: true};
+    Streamer.findOneAndUpdate(query, { login: str2, url: "https://www.twitch.tv/" + str2 }, options, function(err, doc){
         if(err){
             console.log(err);
         } else {
+            console.log(doc);
             res.redirect("/");
         }
     });
 });
 
 app.post("/editstreamer3", function(req, res){
-    const str3 = req.body.streamer3;
-    // Update streamer 3 in the db
-    const query = { num: '3' };
-    Streamer.findOneAndUpdate(query, { login: str3, url: "https://www.twitch.tv/" + str3 }, function(err, res){
+    const str3 = req.body.newstreamer3;
+    const query = { num: 3 };
+    const options = { new: true};
+    Streamer.findOneAndUpdate(query, { login: str3, url: "https://www.twitch.tv/" + str3 }, options, function(err, doc){
         if(err){
             console.log(err);
         } else {
+            console.log(doc);
             res.redirect("/");
         }
     });
@@ -195,3 +199,4 @@ var port = process.env.PORT || 3000;
 app.listen(port, function(){
     console.log("Enter through the lobby.");
 });
+
