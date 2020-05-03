@@ -20,6 +20,10 @@ var iconLink3 = document.querySelector("#iconLink3");
 var streamerList = [];
 var editButtonList = $(".edit");
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
 class Streamer {
     constructor(url, name, isLive, _icon, _span, _edit, _save, _input, _link)
     {
