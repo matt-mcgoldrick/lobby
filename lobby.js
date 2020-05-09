@@ -54,7 +54,7 @@ Streamer.create({
     } else {
         console.log(str);
     }
-});  */
+}); */
 
 function checkIfLive(){
     Streamer.find({}, function(err, str) {
@@ -195,7 +195,7 @@ function callback(error, response, body) {
     }
 }
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, function(){
     console.log("Enter through the lobby.");
 });

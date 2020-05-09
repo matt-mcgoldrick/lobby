@@ -1,24 +1,24 @@
-var cardList = document.querySelectorAll(".card");
-var editButton1 = document.querySelector("#editButton1");
-var editButton2 = document.querySelector("#editButton2");
-var editButton3 = document.querySelector("#editButton3");
-var saveButton1 = document.querySelector("#saveButton1");
-var saveButton2 = document.querySelector("#saveButton2");
-var saveButton3 = document.querySelector("#saveButton3");
-var streamerNameInput1 = document.querySelector("#streamerNameInput1");
-var streamerNameInput2 = document.querySelector("#streamerNameInput2");
-var streamerNameInput3 = document.querySelector("#streamerNameInput3");
-var streamerName1 = document.querySelector("#streamerName1");
-var streamerName2 = document.querySelector("#streamerName2");
-var streamerName3 = document.querySelector("#streamerName3");
-var streamerIcon1 = document.querySelector("#streamerIcon1");
-var streamerIcon2 = document.querySelector("#streamerIcon2");
-var streamerIcon3 = document.querySelector("#streamerIcon3");
-var iconLink1 = document.querySelector("#iconLink1");
-var iconLink2 = document.querySelector("#iconLink2");
-var iconLink3 = document.querySelector("#iconLink3");
-var streamerList = [];
-var editButtonList = $(".edit");
+const cardList = document.querySelectorAll(".card");
+const editButton1 = document.querySelector("#editButton1");
+const editButton2 = document.querySelector("#editButton2");
+const editButton3 = document.querySelector("#editButton3");
+const saveButton1 = document.querySelector("#saveButton1");
+const saveButton2 = document.querySelector("#saveButton2");
+const saveButton3 = document.querySelector("#saveButton3");
+const streamerNameInput1 = document.querySelector("#streamerNameInput1");
+const streamerNameInput2 = document.querySelector("#streamerNameInput2");
+const streamerNameInput3 = document.querySelector("#streamerNameInput3");
+const streamerName1 = document.querySelector("#streamerName1");
+const streamerName2 = document.querySelector("#streamerName2");
+const streamerName3 = document.querySelector("#streamerName3");
+const streamerIcon1 = document.querySelector("#streamerIcon1");
+const streamerIcon2 = document.querySelector("#streamerIcon2");
+const streamerIcon3 = document.querySelector("#streamerIcon3");
+const iconLink1 = document.querySelector("#iconLink1");
+const iconLink2 = document.querySelector("#iconLink2");
+const iconLink3 = document.querySelector("#iconLink3");
+const streamerList = [];
+const editButtonList = $(".edit");
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -116,7 +116,7 @@ function dynamicInputs() {
 
 // Listen for user to click any of the edit buttons and accept user input
 $(".edit").on("click", function() {
-    var editbutton = $(this);
+    let editbutton = $(this);
     streamerList.forEach(function(strmr) {
         if(strmr._edit.id == editbutton.attr('id')) {
             strmr._span.classList.add("d-none");
@@ -129,7 +129,7 @@ $(".edit").on("click", function() {
 
 // Clicking on save button removes the  
 $(".save").on("click", function() {
-    var savebutton = $(this);
+    let savebutton = $(this);
     streamerList.forEach(function(strmr) {
         if(strmr._save.id == savebutton.attr('id')) {
             strmr._save.classList.add("d-none");
@@ -145,7 +145,7 @@ $(".save").on("click", function() {
 
 $("input").on("keypress", function(e) {
     if(e.which === 13) {
-        var savebutton = $(this).siblings(".save");
+        let savebutton = $(this).siblings(".save");
         streamerList.forEach(function(strmr) {
             if(strmr._save.id == savebutton.attr('id')) {
                 strmr._save.classList.add("d-none");
@@ -161,7 +161,7 @@ $("input").on("keypress", function(e) {
 
 // function that is called when adding a streamer
 function addStreamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link) {
-    var streamer = new Streamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link);
+    let streamer = new Streamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link);
     streamerList.push(streamer);
 }
 
