@@ -8,11 +8,10 @@ const express = require("express"),
 
 mongoose.connect("mongodb://localhost:27017/lobby_io", { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
-
-app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/public', express.static("public"));
 app.use(expressSanitizer());
+app.set("view engine", "ejs");
+app.use('/public', express.static("public"));
 app.use(methodOverride("_method"));
 
 // MONGOOSE/MODEL CONFIG
@@ -22,6 +21,12 @@ const streamerSchema = new mongoose.Schema({
     isLive: String
 });
 const Streamer = mongoose.model("Streamer", streamerSchema);
+
+const port = process.env.PORT || 3000;
+app.listen(port, function(){
+    console.log("Enter through the lobby.");
+});
+
 
 Streamer.create({
     login: "siritron",
@@ -59,6 +64,61 @@ Streamer.create({
     }
 });
 
+
+class streamerIcon {
+    constructor(iconElement, isLive) {
+        this.iconElement = iconElement;
+        this.isLive = isLive;
+    }
+}
+
+function checkIfLive(){
+    Streamer.find({}, function(err, str) {
+        if(err) {
+            console.log(err);
+        } else {
+            //console.log("str:: " + str);
+            str.forEach(function(streamer){
+                options.url = 'https://api.twitch.tv/helix/streams?user_login=' + streamer.login;
+                request(options, callback);
+            });
+        }
+    });
+}
+
+const options = {
+    url: "",
+    headers: {
+        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
+    }    
+};
+
+function callback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+        const info = JSON.parse(body);
+        if (info.data.length !== 0) {
+            const query = {login: this.uri.query.substr(11)};
+            Streamer.findOneAndUpdate(query, {isLive: "color:red" }, function(err, str) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(str);
+                }
+            });
+        }
+        else {
+            const query = {login: this.uri.query.substr(11)};
+            Streamer.findOneAndUpdate(query, {isLive: "color:none" }, function(err, str) {
+                if (err) {
+                    console.log(err);
+                } else { 
+                    console.log(str);
+                }
+            });
+        }
+    }
+}
+
 app.get("/", function(req, res){
     res.redirect("/streamers");
 })
@@ -81,8 +141,6 @@ app.get("/streamers", function(req, res) {
                 if(err){
                     console.log(err);
                 } else {
-                    console.log("HERE")
-                    console.log("str: " + str);
                     console.log(streamers);   
                 }
             });
@@ -132,85 +190,25 @@ app.put("/blog/:id", function(req, res) {
 
 });
 
-app.put("/streamers/:id", function(req, res){
-    const streamer1 = req.body.streamer1;
+app.put("/streamers/:id",  function(req, res){
     const options = { new: true};
-    Streamer.update({}, { login: streamer1, url: "https://www.twitch.tv/" + streamer1 }, options, function(err, doc){
+    req.body.updatedStreamer = req.sanitize(req.body.updatedStreamer);
+    Streamer.findByIdAndUpdate(req.params.id, { login: req.body.updatedStreamer, url: "https://www.twitch.tv/" + req.body.updatedStreamer }, options, function(err, doc){
         if(err){
             console.log(err);
         } else {
             console.log(doc);
+            console.log("req body1: " + req.body.updatedStreamer);
             res.redirect("/streamers");
         }
     });
-
 });
 
 // DESTROY
 app.delete("/blog/:id", function(req, res){
     
-})
+});
 
 app.delete("/streamers/:id", function(req, res){
 
-});
-
-
-class streamerIcon {
-    constructor(iconElement, isLive) {
-        this.iconElement = iconElement;
-        this.isLive = isLive;
-    }
-}
-
-function checkIfLive(){
-    Streamer.find({}, function(err, str) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log("str:: " + str);
-            str.forEach(function(streamer){
-                options.url = 'https://api.twitch.tv/helix/streams?user_login=' + streamer.login;
-                request(options, callback);
-            });
-        }
-    });
-}
-
-const options = {
-    url: "",
-    headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
-    }    
-};
-
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        const info = JSON.parse(body);
-        if (info.data.length !== 0) {
-            const query = {login: this.uri.query.substr(11)};
-            Streamer.findOneAndUpdate(query, {isLive: "color:red" }, function(err, str) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(str);
-                }
-            });
-        }
-        else {
-            const query = {login: this.uri.query.substr(11)};
-            Streamer.findOneAndUpdate(query, {isLive: "color:none" }, function(err, str) {
-                if (err) {
-                    console.log(err);
-                } else { 
-                    console.log(str);
-                }
-            });
-        }
-    }
-}
-
-const port = process.env.PORT || 3000;
-app.listen(port, function(){
-    console.log("Enter through the lobby.");
 });

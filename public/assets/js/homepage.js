@@ -127,7 +127,6 @@ $(".edit").on("click", function() {
     editbutton.addClass("d-none");
 });
 
-// Clicking on save button removes the  
 $(".save").on("click", function() {
     let savebutton = $(this);
     streamerList.forEach(function(strmr) {
