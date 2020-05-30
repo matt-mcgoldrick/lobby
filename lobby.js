@@ -27,7 +27,7 @@ app.listen(port, function(){
     console.log("Enter through the lobby.");
 });
 
-
+/*
 Streamer.create({
     login: "siritron",
     url: "https://www.twitch.tv/siritron",
@@ -63,6 +63,7 @@ Streamer.create({
         console.log(str);
     }
 });
+*/
 
 
 class streamerIcon {
@@ -74,11 +75,13 @@ class streamerIcon {
 
 function checkIfLive(){
     Streamer.find({}, function(err, str) {
+        console.log("did we make it to this last part?");
         if(err) {
             console.log(err);
         } else {
-            //console.log("str:: " + str);
+            console.log("made it to else of checkiflive");
             str.forEach(function(streamer){
+                console.log("made it in the forloop for " + streamer.login)
                 options.url = 'https://api.twitch.tv/helix/streams?user_login=' + streamer.login;
                 request(options, callback);
             });
@@ -89,7 +92,8 @@ function checkIfLive(){
 const options = {
     url: "",
     headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej'
+        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej',
+        'Authorization': 'Bearer yzrgoc64vaeodoluhuah3tdpw4c5pa'
     }    
 };
 
@@ -117,6 +121,7 @@ function callback(error, response, body) {
             });
         }
     }
+    console.log("...hello?");
 }
 
 app.get("/", function(req, res){
@@ -137,13 +142,7 @@ app.get("/streamers", function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            checkIfLive(function(err, str){
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log(streamers);   
-                }
-            });
+            checkIfLive();   
             res.render("homepage", {streamers: streamers});
         }
     });
