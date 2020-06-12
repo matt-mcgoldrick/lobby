@@ -1,7 +1,9 @@
 <%- include('partials/header'); -%>
 
+<h1>Edit Blog</h1>
+
 <form action="/blog/<%= blog._id %>?_method=PUT" method="POST">
-    <input type="text" name="title">
+    <input type="text" name="title" text="<%= blog.title %>">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

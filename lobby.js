@@ -224,7 +224,7 @@ app.get("/blog/:id/edit", function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render(editBlog('editBlog', {blog: blog}));
+            res.render('editBlog', {blog: blog});
         }
     });
 });
