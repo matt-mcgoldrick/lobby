@@ -1,1 +1,9 @@
-<h1>New Blog</h1>
+<%- include('partials/header'); -%>
+<div class="container">
+    <form action="/blog" method="POST">
+        <div><input type="text" name="title"></div>
+        <div><input type="text" name="body"></div>
+        <div><input type="submit" class="btn btn-primary" value="Submit"></div>
+    </form>
+</div>
+<%- include('partials/footer'); -%>
