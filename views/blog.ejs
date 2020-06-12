@@ -2,14 +2,14 @@
 
 <h1>Blog</h1>
 
-<form action="/blog/new" method="GET">
-    <input type="submit" class="btn btn-primary" value="Create New Blog">
-</form>
-
 <% blogs.forEach(function(blog){ %>
     <h3> <%= blog.title %> </h3>
     <p> <%= blog.body %> </p>
     <hr>
 <% }); %>   
+
+<form action="/blog/new" method="GET">
+    <input type="submit" class="btn btn-primary" value="Create New Blog">
+</form>
 
 <%- include('partials/footer'); -%> 
