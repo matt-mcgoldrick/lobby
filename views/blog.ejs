@@ -4,7 +4,8 @@
 
 <% blogs.forEach(function(blog){ %>
     <div class="row">
-        <div class="col-lg-6"><h3> <%= blog.title %> </h3>
+        <div class="col-lg-6">
+            <h3><a href="/blog/<%= blog._id %>"><%= blog.title %></a></h3>
         </div>
         <div class="col-lg-6 d-flex align-self-center justify-content-end"> 
             <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST">
