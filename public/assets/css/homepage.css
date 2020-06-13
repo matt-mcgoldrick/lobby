@@ -99,3 +99,8 @@ input {
 #album:hover {
     color: blue;
 }
+
+#body {
+    height:200px;
+    font-size:14pt;
+}
