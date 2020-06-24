@@ -171,11 +171,11 @@ app.get("/streamers", function(req, res) {
 
 // NEW
 app.get("/blog/new", function(req, res){
-    res.render("newBlog");
+    res.render("blog/new");
 });
 
 app.get("/streamers/new", function(req, res){
-    res.render("new");
+    // DNE
 });
 
 // CREATE
@@ -203,7 +203,7 @@ app.get("/blog/:id", function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('singleBlog', {blog: blog} );
+            res.render('blog/show', {blog: blog} );
         }
     });
 });
@@ -224,7 +224,7 @@ app.get("/blog/:id/edit", function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('editBlog', {blog: blog});
+            res.render('blog/edit', {blog: blog});
         }
     });
 });
