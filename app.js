@@ -4,6 +4,9 @@ const express = require("express"),
       expressSanitizer = require("express-sanitizer"),
       bodyParser = require('body-parser'),
       mongoose = require("mongoose"),
+      Streamer = require("./models/streamer"),
+      Blog = require("./models/blog"),
+      User = require("./models/user"),
       app = express();
 
 mongoose.connect("mongodb://localhost:27017/lobby_io", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -14,75 +17,10 @@ app.set("view engine", "ejs");
 app.use('/public', express.static("public"));
 app.use(methodOverride("_method"));
 
-// MONGOOSE/MODEL CONFIG
-const streamerSchema = new mongoose.Schema({
-    login: String,
-    url: String, 
-    isLive: String
-});
-const Streamer = mongoose.model("Streamer", streamerSchema);
-
-const blogSchema = new mongoose.Schema({
-    title: String,
-    body: String
-});
-const Blog = mongoose.model("Blog", blogSchema);
-
 const port = process.env.PORT || 3000;
 app.listen(port, function(){
     console.log("Enter through the lobby.");
 });
-
-/*
-Streamer.create({
-    login: "siritron",
-    url: "https://www.twitch.tv/siritron",
-    isLive: "color:none"
-}, function(err, str){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(str);
-    }
-});
-
-Streamer.create({
-    login: "xcaliz0rz",
-    url: "https://www.twitch.tv/xcaliz0rz",
-    isLive: "color:none"
-}, function(err, str){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(str);
-    }
-});
-
-Streamer.create({
-    login: "cirno_tv",
-    url: "https://www.twitch.tv/cirno_tv",
-    isLive: "color:none"
-}, function(err, str){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(str);
-    }
-});
-*/
-
-/*
-Blog.create({
-    title: "First blog post",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-}, function(err, str){
-    if(err){
-        console.log(err);
-    } else {
-        console.log(str);
-    }
-});
-*/
 
 class streamerIcon {
     constructor(iconElement, isLive) {
