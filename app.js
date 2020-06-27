@@ -1,3 +1,5 @@
+const seedDB = require("./seeds");
+
 const express = require("express"),
       request = require("request"),
       methodOverride = require("method-override"),
@@ -16,6 +18,7 @@ app.use(expressSanitizer());
 app.set("view engine", "ejs");
 app.use('/public', express.static("public"));
 app.use(methodOverride("_method"));
+seedDB();
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(){
