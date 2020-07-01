@@ -1,4 +1,5 @@
 const seedDB = require("./seeds");
+const passport = require("passport");
 
 const express = require("express"),
       request = require("request"),
@@ -6,6 +7,7 @@ const express = require("express"),
       expressSanitizer = require("express-sanitizer"),
       bodyParser = require('body-parser'),
       mongoose = require("mongoose"),
+      LocalStrategy = require("passport-local"),
       Streamer = require("./models/streamer"),
       Blog = require("./models/blog"),
       User = require("./models/user"),
@@ -19,6 +21,23 @@ app.set("view engine", "ejs");
 app.use('/public', express.static("public"));
 app.use(methodOverride("_method"));
 seedDB();
+
+// Passport Configuration
+app.use(require("express-session")({
+    secret: "Lobby",
+    resave : false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(){
@@ -224,3 +243,44 @@ app.delete("/streamers/:id", function(req, res){
         }
     });
 });
+
+// AUTH ROUTES
+app.get("/register", function(req, res){
+    res.render("register");
+});
+
+app.post("/register", function(req, res){
+    let newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/");
+        })
+    })
+});
+
+app.get("/login", function(req, res){
+    res.render("login");
+});
+
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+})
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}

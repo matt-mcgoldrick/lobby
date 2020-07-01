@@ -1,8 +1,10 @@
 var mongoose = require("mongoose");
+var passportLocalMongoose = require("passport-local-mongoose");
 
 // SCHEMA SETUP
 const userSchema = new mongoose.Schema({
     username: String,
+    password: String,
     streamerList: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -21,5 +23,7 @@ const userSchema = new mongoose.Schema({
         console.log(str);
     }
 }); */
+
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", userSchema)

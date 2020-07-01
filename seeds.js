@@ -47,6 +47,7 @@ async function seedDB(){
 
         let user = await User.create({
             username: "Matt",
+            password: "Test",
             streamerList: []
         });
         console.log("User created");
