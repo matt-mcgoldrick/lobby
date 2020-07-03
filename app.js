@@ -102,11 +102,15 @@ app.get("/", function(req, res){
     res.redirect("/streamers");
 })
 
-// INDEX
 app.get("/about", function(req, res) {
     res.render("about");
 });
 
+// ============
+// BLOG ROUTES
+// ============
+
+// INDEX
 app.get("/blog", function(req, res) {
     Blog.find({}, function(err, blogs) {
         if(err) {
@@ -118,24 +122,9 @@ app.get("/blog", function(req, res) {
     });
 });
 
-app.get("/streamers", function(req, res) {
-    Streamer.find({}, function(err, streamers) {
-        if(err) {
-            console.log(err);
-        } else {
-            checkIfLive();   
-            res.render("homepage", {streamers: streamers});
-        }
-    });
-});
-
 // NEW
 app.get("/blog/new", function(req, res){
     res.render("blog/new");
-});
-
-app.get("/streamers/new", function(req, res){
-    // DNE
 });
 
 // CREATE
@@ -153,10 +142,6 @@ app.post("/blog", function(req, res){
     })
 });
 
-app.post("/streamers", function(req, res) {
-
-});
-
 // SHOW
 app.get("/blog/:id", function(req, res) {
     Blog.findById(req.params.id, function(err, blog){
@@ -164,16 +149,6 @@ app.get("/blog/:id", function(req, res) {
             console.log(err);
         } else {
             res.render('blog/show', {blog: blog} );
-        }
-    });
-});
-
-app.get("/streamers/:id", function(req, res){
-    Streamer.findById(req.params.id, function(err, str){
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(str);
         }
     });
 });
@@ -189,16 +164,6 @@ app.get("/blog/:id/edit", function(req, res) {
     });
 });
 
-app.get("/streamers/:id/edit", function(req, res) {
-    Streamers.findById(req.params.id, function(err, str){
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(str);
-        }
-    });
-});
-
 // UPDATE
 app.put("/blog/:id", function(req, res) {
     Blog.findByIdAndUpdate(req.params.id, req.body, function(err, blog){
@@ -208,19 +173,6 @@ app.put("/blog/:id", function(req, res) {
             res.redirect("/blog");
         }
     })
-});
-
-app.put("/streamers/:id",  function(req, res){
-    const options = { new: true};
-    req.body.updatedStreamer = req.sanitize(req.body.updatedStreamer);
-    Streamer.findByIdAndUpdate(req.params.id, { login: req.body.updatedStreamer, url: "https://www.twitch.tv/" + req.body.updatedStreamer }, options, function(err, doc){
-        if(err){
-            console.log(err);
-        } else {
-            console.log(doc);
-            res.redirect("/streamers");
-        }
-    });
 });
 
 // DESTROY
@@ -234,17 +186,52 @@ app.delete("/blog/:id", function(req, res){
     });
 });
 
-app.delete("/streamers/:id", function(req, res){
-    Streamer.findByIdAndRemove(req.params.id, function(err, str){
+// ============
+// USER ROUTES
+// ============
+//user profile
+app.get("/users/:id", function(req, res){
+    User.findById(req.params.id, function(err, user){
         if(err) {
             console.log(err);
         } else {
-            res.redirect("/streamers");
+            res.render("profile", {user: user});
         }
     });
 });
 
+// ================
+// STREAMER ROUTES
+// ================
+
+app.get("/users/:id/streamers", function(req, res) {
+    Streamer.find({}, function(err, streamers) {
+        if(err) {
+            console.log(err);
+        } else {
+            checkIfLive();   
+            res.render("homepage", {streamers: streamers});
+        }
+    });
+});
+
+app.put("/users/:id/streamers/:id", isLoggedIn, function(req, res){
+    const options = { new: true};
+    req.body.updatedStreamer = req.sanitize(req.body.updatedStreamer);
+    Streamer.findByIdAndUpdate(req.params.id, { login: req.body.updatedStreamer, url: "https://www.twitch.tv/" + req.body.updatedStreamer }, options, function(err, doc){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(doc);
+            res.redirect("/");
+        }
+    });
+});
+
+// ============
 // AUTH ROUTES
+// ============
+
 app.get("/register", function(req, res){
     res.render("register");
 });
@@ -276,7 +263,7 @@ app.post("/login", passport.authenticate("local",
 app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");
-})
+});
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
