@@ -1,4 +1,4 @@
-<%- include('partials/header'); -%>      
+<%- include('partials/header') %>      
     <h1 class="display-4 font-weight-bold">LOBBY.IO</h1>
     <div class="row">
         <h2>FEED</h2>
@@ -82,33 +82,64 @@
     </div>
     <div class="row">
         <div class="col-md-6">
+            <% if(!currentUser) { %> 
+                <% console.log(defaultUser); %>
+                <div class="row streamer d-flex justify-content-around">
+                    <a id="iconLink1" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon1" style=<%=defaultUser.streamerList[0].isLive%>></i></a>
+                    <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[0]._id%>?_method=PUT" method="POST">
+                        <input type="text" id="streamerNameInput1" class="d-none" value="<%=defaultUser.streamerList[0].login%>" name="updatedStreamer"> 
+                        <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton1">Save</button>
+                    </form>
+                    <span id="streamerName1" class=""><%= defaultUser.streamerList[0].login%></span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton1">Edit</button>
+                </div> 
+                <div class="row streamer d-flex justify-content-around">
+                    <a id="iconLink2" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon2" style="<%=defaultUser.streamerList[1].isLive%>"></i></a> 
+                    <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[1]._id%>?_method=PUT" method="POST">
+                        <input type="text" id="streamerNameInput2" class="d-none" value="<%=defaultUser.streamerList[1].login%>" name="updatedStreamer">   
+                        <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton2">Save</button>
+                    </form>
+                    <span id="streamerName2" class=""><%=defaultUser.streamerList[1].login%></span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton2">Edit</button>
+                </div> 
+                <div class="row streamer d-flex justify-content-around">
+                    <a id="iconLink3" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon3" style="<%=defaultUser.streamerList[2].isLive%>"></i></a>
+                    <form action="/users/<%= defaultUser._id %>/streamers/<%=defaultUser.streamerList[2]._id %>?_method=PUT" method="POST">
+                        <input type="text" id="streamerNameInput3" class="d-none" value="<%=defaultUser.streamerList[2].login%>" name="updatedStreamer">
+                        <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton3">Save</button>
+                    </form>
+                    <span id="streamerName3" class=""><%=defaultUser.streamerList[2].login%></span>
+                    <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton3">Edit</button>
+                </div>
+        <% } else { %>
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink1" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon1" style=<%= streamers[0].isLive %>></i></a>
-                <form action="/streamers/<%= streamers[0]._id %>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput1" class="d-none" value=<%= streamers[0].login%> name="updatedStreamer"> 
+                <a id="iconLink1" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon1" style="<%=currentUser.streamerList[0].isLive%>"></i></a>
+                <form action="/users/<%=currentUser._id%>/streamers/<%=currentUser.streamerList[0]._id%>?_method=PUT" method="POST">
+                    <input type="text" id="streamerNameInput1" class="d-none" value="<%=currentUser.streamerList[0].login%>" name="updatedStreamer"> 
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton1">Save</button>
                 </form>
-                <span id="streamerName1" class=""><%= streamers[0].login%></span>
+                <span id="streamerName1" class=""><%= currentUser.streamerList[0].login%></span>
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton1">Edit</button>
             </div> 
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink2" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon2" style=<%= streamers[1].isLive %>></i></a> 
-                <form action="/streamers/<%= streamers[1]._id %>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput2" class="d-none" value=<%= streamers[1].login%> name="updatedStreamer">   
+                <a id="iconLink2" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon2" style="<%=currentUser.streamerList[1].isLive%>"></i></a> 
+                <form action="/users/<%=currentUser._id%>/streamers/<%=currentUser.streamerList[1]._id%>?_method=PUT" method="POST">
+                    <input type="text" id="streamerNameInput2" class="d-none" value="<%=currentUser.streamerList[1].login%>" name="updatedStreamer">   
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton2">Save</button>
                 </form>
-                <span id="streamerName2" class=""><%= streamers[1].login%></span>
+                <span id="streamerName2" class=""><%=currentUser.streamerList[1].login%></span>
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton2">Edit</button>
             </div> 
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink3" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon3" style=<%= streamers[2].isLive %>></i></a>
-                <form action="/streamers/<%= streamers[2]._id %>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput3" class="d-none" value=<%= streamers[2].login%> name="updatedStreamer">
+                <a id="iconLink3" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon3" style="<%=currentUser.streamerList[2].isLive%>"></i></a>
+                <form action="/users/<%= currentUser._id %>/streamers/<%=currentUser.streamerList[2]._id %>?_method=PUT" method="POST">
+                    <input type="text" id="streamerNameInput3" class="d-none" value="<%=currentUser.streamerList[2].login%>" name="updatedStreamer">
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton3">Save</button>
                 </form>
-                <span id="streamerName3" class=""><%= streamers[2].login%></span>
+                <span id="streamerName3" class=""><%=currentUser.streamerList[2].login%></span>
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton3">Edit</button>
             </div>  
+        <% } %>
         </div>   
         <div class="col-md-6" id="dev">
             <a class="twitter-timeline" 
@@ -143,4 +174,4 @@
         <a href="https://www.youtube.com/watch?v=Ztc5oZ0_b8k&list=PLBVCk8lHLMaWzsYa090H78ELUsbtNnKwf&index=15" style="font-size: 24px; margin-left: 30px;" id="album">Travis Strikes Again</a>
     </div>
     <hr>
-<%- include('partials/footer'); -%>
+<%- include('./partials/footer'); -%>

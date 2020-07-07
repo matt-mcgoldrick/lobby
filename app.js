@@ -44,13 +44,6 @@ app.listen(port, function(){
     console.log("Enter through the lobby.");
 });
 
-class streamerIcon {
-    constructor(iconElement, isLive) {
-        this.iconElement = iconElement;
-        this.isLive = isLive;
-    }
-}
-
 function checkIfLive(){
     Streamer.find({}, function(err, str) {
         if(err) {
@@ -99,8 +92,15 @@ function callback(error, response, body) {
 }
 
 app.get("/", function(req, res){
-    res.redirect("/streamers");
-})
+    User.findOne({username: "Default"}).populate('streamerList').exec(function(err, defaultUser) {
+        if(err){
+            console.log(err);
+        } else {
+            checkIfLive();
+            res.render("homepage", {defaultUser: defaultUser});
+        }
+    });
+});
 
 app.get("/about", function(req, res) {
     res.render("about");
@@ -204,17 +204,6 @@ app.get("/users/:id", function(req, res){
 // STREAMER ROUTES
 // ================
 
-app.get("/users/:id/streamers", function(req, res) {
-    Streamer.find({}, function(err, streamers) {
-        if(err) {
-            console.log(err);
-        } else {
-            checkIfLive();   
-            res.render("homepage", {streamers: streamers});
-        }
-    });
-});
-
 app.put("/users/:id/streamers/:id", isLoggedIn, function(req, res){
     const options = { new: true};
     req.body.updatedStreamer = req.sanitize(req.body.updatedStreamer);
@@ -246,7 +235,7 @@ app.post("/register", function(req, res){
         passport.authenticate("local")(req, res, function(){
             res.redirect("/");
         })
-    })
+    });
 });
 
 app.get("/login", function(req, res){

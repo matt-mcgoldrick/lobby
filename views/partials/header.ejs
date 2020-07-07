@@ -20,6 +20,11 @@
                 <a class="nav-link font-weight-bold p-2" href="/">Home</a>
                 <a class="nav-link font-weight-bold p-2" href="/about">About</a>
                 <a class="nav-link font-weight-bold p-2" href="/blog">Blog</a>
+                <% if(!currentUser){ %>
                 <a class="nav-link font-weight-bold p-2 ml-auto" href="/login">Login</a>
                 <a class="nav-link font-weight-bold p-2" href="/register">Register</a>
+                <% } else { %>
+                <a href="/user/<%= currentUser._id %>">Signed in as <%= currentUser.username %></a></span>
+                <a href="/logout">Logout</a>
+                <% } %>
             </nav>

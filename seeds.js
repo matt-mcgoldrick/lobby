@@ -42,23 +42,21 @@ async function seedDB(){
         console.log('Streamers removed from db');
         await Blog.remove({});
         console.log('Blogs removed from db');
-        await User.remove({}); 
-        console.log('Users removed from db');
+        await User.remove({username: "Default"}); 
+        console.log('Default users removed from db');
 
         let user = await User.create({
-            username: "Matt",
-            password: "Test",
+            username: "Default",
             streamerList: []
         });
-        console.log("User created");
+        console.log("Default user created");
         for (const s of streamers) {
             let streamer = await Streamer.create(s);
             console.log("Streamer created");   
             user.streamerList.push(streamer);
-            user.save();
-            console.log("Streamer added to user's streamer list");
+            console.log("Streamer added to default user's streamer list");
         }   
-       
+        user.save();
         for (const b of blogs ) {
             await Blog.create(b);
             console.log("Blog post created");
