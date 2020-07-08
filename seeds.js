@@ -38,8 +38,6 @@ var blogs = [
 
 async function seedDB(){
     try {
-        await Streamer.remove({});
-        console.log('Streamers removed from db');
         await Blog.remove({});
         console.log('Blogs removed from db');
         await User.remove({username: "Default"}); 
