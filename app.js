@@ -137,7 +137,7 @@ app.get("/blog/new", function(req, res){
 });
 
 // CREATE
-app.post("/blog", function(req, res){
+app.post("/blog",function(req, res){
     Blog.create({
         title: req.body.title,
         body: req.body.body
