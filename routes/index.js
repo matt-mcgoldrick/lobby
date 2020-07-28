@@ -6,8 +6,27 @@ const express = require('express'),
       passport = require("passport"),
       request = require('request');
 
+const streamers = [
+    {
+        login: "siritron",
+        url: "https://www.twitch.tv/siritron",
+        isLive: "color:none"
+    },
+    {
+        login: "xcaliz0rz",
+        url: "https://www.twitch.tv/xcaliz0rz",
+        isLive: "color:none"
+    },
+    {
+        login: "cirno_tv",
+        url: "https://www.twitch.tv/cirno_tv",
+        isLive: "color:none"
+    }
+]
+
 router.get("/", function(req, res){
     if(!req.user){
+        console.log("made it to default user redirect");
         User.findOne({username: "Default"}).populate('streamerList').exec(function(err, defaultUser) {
             if(err){
                 console.log(err);
@@ -17,12 +36,13 @@ router.get("/", function(req, res){
             }
         });
     } else {
-        User.findOne({username: req.user.username}).populate('streamerList').exec(function(err, defaultUser) {
+        console.log("made it to specific user redirect");
+        User.findOne({username: req.user.username}).populate('streamerList').exec(function(err, realUser) {
             if(err){
                 console.log(err);
             } else {
                 checkIfLive();
-                res.render("homepage", {defaultUser: defaultUser});
+                res.render("homepage", {defaultUser: realUser});
             }
         })
     }
@@ -56,22 +76,23 @@ router.get("/register", function(req, res){
     res.render("register");
 });
 
-router.post("/register", function(req, res){
-    User.findOne({username: "Default"}, function(err, defaultUser){
+router.post("/register", async function(req, res){
+    let newUser = new User({
+        username: req.body.username,
+        streamerList: []
+    });
+    for (const s of streamers){
+        let streamer = await Streamer.create(s);
+        newUser.streamerList.push(streamer);
+    }
+    User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
-        } else{
-            let newUser = new User({username: req.body.username, streamerList: defaultUser.streamerList});
-            User.register(newUser, req.body.password, function(err, user){
-                if(err){
-                    console.log(err);
-                    return res.render("register");
-                }
-                passport.authenticate("local")(req, res, function(){
-                    res.redirect("/");
-                })
-            });
+            return res.render("register");
         }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/");
+        });
     });
 });
 
