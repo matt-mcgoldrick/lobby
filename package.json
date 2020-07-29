@@ -4,6 +4,7 @@
   "description": "lobby.io is a somewhat-curated aggregate site for FPS and BR related news.  Load it up between matches to catch up on recent announcements, read developer tweets, peek at the latest patch notes for your game of choice, and SO MUCH MORE",
   "main": "lobby.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
