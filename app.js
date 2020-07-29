@@ -19,7 +19,7 @@ const blogRoutes = require("./routes/blog"),
       indexRoutes = require("./routes/index")
 
 //mongoose.connect("mongodb://localhost:27017/lobby_io", { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect("mongodb://heroku_k9599nb8:heroku_k9599nb8@ds147436.mlab.com:47436/heroku_k9599nb8", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
