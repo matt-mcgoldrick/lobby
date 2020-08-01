@@ -1,3 +1,5 @@
+const { checkUserAuthBlog } = require('../middleware');
+
 const express = require('express'),
       router = express.Router(),
       Blog = require('../models/blog'),
@@ -25,10 +27,11 @@ router.get("/new", function(req, res){
 });
 
 // CREATE
-router.post("/",function(req, res){
+router.post("/", function(req, res){
     Blog.create({
         title: req.body.title,
-        body: req.body.body
+        body: req.body.body,
+        author: req.user
     }, function(err, blogs){
         if(err){
             console.log(err);
@@ -62,7 +65,7 @@ router.get("/:id/edit", function(req, res) {
 });
 
 // UPDATE
-router.put("/:id", function(req, res) {
+router.put("/:id", checkUserAuthBlog,function(req, res) {
     Blog.findByIdAndUpdate(req.params.id, req.body, function(err, blog){
         if(err){
             console.log(err);
@@ -73,7 +76,7 @@ router.put("/:id", function(req, res) {
 });
 
 // DESTROY
-router.delete("/:id", function(req, res){
+router.delete("/:id", checkUserAuthBlog, function(req, res){
     Blog.findByIdAndRemove(req.params.id, function(err, blog){
         if(err) {
             console.log(err);
