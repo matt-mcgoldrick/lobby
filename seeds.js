@@ -15,8 +15,8 @@ var streamers = [
         isLive: "color:none"
     },
     {
-        login: "cirno_tv",
-        url: "https://www.twitch.tv/cirno_tv",
+        login: "seriesofblurs",
+        url: "https://www.twitch.tv/seriesofblurs",
         isLive: "color:none"
     }
 ]
