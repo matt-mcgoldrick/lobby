@@ -176,5 +176,5 @@ $(".card").hover(
 function init() {
     addStreamer("https://www.twitch.tv/siritron", "siritron", false, streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
     addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", false, streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
-    addStreamer("https://www.twitch.tv/cirno_tv", "cirno_tv", false, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
+    addStreamer("https://www.twitch.tv/seriesofblurs", "seriesofblurs", false, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
 }
