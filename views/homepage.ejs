@@ -64,20 +64,21 @@
                 </a>
             </div>
         </div>
+        <div class="col-lg-12 row justify-content-center"><i class="fa fa-chevron-down d-none" id="expandFeed"></i></div>
     </div>
     <hr>
-    <div class="row align-items-start mb-2 align-items-center">
+    <div class="row mb-2 align-items-center">
         <div class="col-sm-3">
             <h2>STREAMS</h2>
         </div>
-        <div class="col-sm-3 d-flex justify-content-end">
-            <i class="fa fa-info-circle align-items-center" data-toggle="tooltip" data-placement="top" title="Personalize your list of streamers"></i>
-        </div>
         <div class="col-sm-3">
-            <h2>DEV</h2>
+            <i class="fa fa-info-circle float-right" data-toggle="tooltip" data-placement="top" title="Personalize your list of streamers"></i>
         </div>
-        <div class="col-sm-3 d-flex justify-content-end">
-            <i class="fa fa-info-circle align-items-center" data-toggle="tooltip" data-placement="top" title="Keep up with developer tweets (placeholder list)"></i>
+        <div class="col-sm-3 big-header">
+            <h2 class="big-header">DEV</h2>
+        </div>
+        <div class="col-sm-3 big-header">
+            <i class="fa fa-info-circle big-header float-right" data-toggle="tooltip" data-placement="top" title="Keep up with developer tweets (placeholder list)"></i>
         </div>
     </div>
     <div class="row">
@@ -86,7 +87,7 @@
             <div class="row streamer d-flex justify-content-around">
                 <a id="iconLink1" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon1" style=<%=defaultUser.streamerList[0].isLive%>></i></a>
                 <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[0]._id%>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput1" class="d-none" value="<%=defaultUser.streamerList[0].login%>" name="updatedStreamer"> 
+                    <input type="text" id="streamerNameInput1" class="d-none align-middle" value="<%=defaultUser.streamerList[0].login%>" name="updatedStreamer"> 
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton1">Save</button>
                 </form>
                 <span id="streamerName1" class=""><%= defaultUser.streamerList[0].login%></span>
@@ -95,7 +96,7 @@
             <div class="row streamer d-flex justify-content-around">
                 <a id="iconLink2" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon2" style=<%=defaultUser.streamerList[1].isLive%>></i></a> 
                 <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[1]._id%>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput2" class="d-none" value="<%=defaultUser.streamerList[1].login%>" name="updatedStreamer">   
+                    <input type="text" id="streamerNameInput2" class="d-none align-middle" value="<%=defaultUser.streamerList[1].login%>" name="updatedStreamer">   
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton2">Save</button>
                 </form>
                 <span id="streamerName2" class=""><%=defaultUser.streamerList[1].login%></span>
@@ -104,13 +105,17 @@
             <div class="row streamer d-flex justify-content-around">
                 <a id="iconLink3" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon3" style=<%=defaultUser.streamerList[2].isLive%>></i></a>
                 <form action="/users/<%= defaultUser._id %>/streamers/<%=defaultUser.streamerList[2]._id %>?_method=PUT" method="POST">
-                    <input type="text" id="streamerNameInput3" class="d-none" value="<%=defaultUser.streamerList[2].login%>" name="updatedStreamer">
+                    <input type="text" id="streamerNameInput3" class="d-none align-middle" value="<%=defaultUser.streamerList[2].login%>" name="updatedStreamer">
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton3">Save</button>
                 </form>
                 <span id="streamerName3" class=""><%=defaultUser.streamerList[2].login%></span>
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton3">Edit</button>
             </div>
-        </div>   
+        </div>  
+        <div class="row small-header d-none align-items-center justify-content-between">
+            <div class="col-sm-6"><h2>DEV</h2></div>
+            <div class="col-sm-6"><i class="fa fa-info-circle float-right" data-toggle="tooltip" data-placement="top" title="Keep up with developer tweets (placeholder list)"></i></div> 
+        </div>
         <div class="col-md-6" id="dev">
             <a class="twitter-timeline" 
                 href="https://twitter.com/TwitterDev/lists/national-parks?ref_src=twsrc%5Etfw"

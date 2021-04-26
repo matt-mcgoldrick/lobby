@@ -27,7 +27,7 @@ router.get("/new", function(req, res){
 });
 
 // CREATE
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
     Blog.create({
         title: req.body.title,
         body: req.body.body,
@@ -65,7 +65,7 @@ router.get("/:id/edit", function(req, res) {
 });
 
 // UPDATE
-router.put("/:id", checkUserAuthBlog,function(req, res) {
+router.put("/:id", checkUserAuthBlog, function(req, res) {
     Blog.findByIdAndUpdate(req.params.id, req.body, function(err, blog){
         if(err){
             console.log(err);

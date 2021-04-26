@@ -1,4 +1,6 @@
 const cardList = document.querySelectorAll(".card");
+const bigHeaders = $(".big-header");
+const smallHeaders = $(".small-header");
 const editButton1 = document.querySelector("#editButton1");
 const editButton2 = document.querySelector("#editButton2");
 const editButton3 = document.querySelector("#editButton3");
@@ -19,6 +21,7 @@ const iconLink2 = document.querySelector("#iconLink2");
 const iconLink3 = document.querySelector("#iconLink3");
 const streamerList = [];
 const editButtonList = $(".edit");
+const expandFeedButton = document.querySelector("#expandFeed");
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -52,32 +55,11 @@ class Streamer {
 init();
 
 // Adjust shading of cards dynamically as window is resized by user
-window.addEventListener("resize", function () {
-    if (window.innerWidth < 768) {
-        //remove shading on 2nd to last card when window is xs-sm
-        cardList[cardList.length - 2].classList.remove("shadow");
-        cardList[cardList.length - 2].classList.add("shadow-sm");
-    }
-    else if (window.innerWidth < 992) {
-        //remove shading on 3rd to last card when window is md 
-        cardList[cardList.length - 3].classList.remove("shadow");
-        cardList[cardList.length - 3].classList.add("shadow-sm");
-
-        //add shading back to 2nd to last card
-        cardList[cardList.length - 2].classList.add("shadow");
-        cardList[cardList.length - 2].classList.remove("shadow-sm");
-    }
-    else {
-        //add shading back to 3rd to last card
-        cardList[cardList.length - 3].classList.add("shadow");
-        cardList[cardList.length - 3].classList.remove("shadow-sm");
-    }
-});
-
-// Adjust shading of cards dynamically as window is resized by user
 window.addEventListener("resize", () => {
     dynamicShadows();
     dynamicInputs();
+    dynamicHeaders();
+    hideCardsOnSmallBreakpoint();
 });
 
 function dynamicShadows() {
@@ -103,7 +85,7 @@ function dynamicShadows() {
 }
 
 function dynamicInputs() {
-    if(window.innerWidth < 768) {
+    if (window.innerWidth < 768) {
         $("input").css("font-size", "25px");
     }
     else if (window.innerWidth < 992) {
@@ -113,6 +95,43 @@ function dynamicInputs() {
         $("input").css("font-size", "25px");   
     }
 }
+
+function hideCardsOnSmallBreakpoint() {
+    if (window.innerWidth < 768) {
+        cardList[cardList.length - 1].classList.add("d-none");
+        cardList[cardList.length - 2].classList.add("d-none");
+        cardList[cardList.length - 3].classList.add("d-none");
+        cardList[cardList.length - 4].classList.add("d-none");
+        expandFeedButton.classList.remove("d-none");
+    }
+    else {
+        cardList[cardList.length - 1].classList.remove("d-none");
+        cardList[cardList.length - 2].classList.remove("d-none");
+        cardList[cardList.length - 3].classList.remove("d-none");
+        cardList[cardList.length - 4].classList.remove("d-none");
+        expandFeedButton.classList.add("d-none");
+    }
+}
+
+function dynamicHeaders() {
+    if (window.innerWidth < 768) {
+        smallHeaders.removeClass("d-none");
+        bigHeaders.addClass("d-none");
+    }
+    else {
+        smallHeaders.addClass("d-none");
+        bigHeaders.removeClass("d-none");
+    }
+}
+
+
+$(".fa-chevron-down").on("click", function() {
+    expandFeedButton.classList.add("d-none");
+    cardList[cardList.length - 1].classList.remove("d-none");
+    cardList[cardList.length - 2].classList.remove("d-none");
+    cardList[cardList.length - 3].classList.remove("d-none");
+    cardList[cardList.length - 4].classList.remove("d-none");
+});
 
 // Listen for user to click any of the edit buttons and accept user input
 $(".edit").on("click", function() {
@@ -177,4 +196,7 @@ function init() {
     addStreamer("https://www.twitch.tv/siritron", "siritron", false, streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
     addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", false, streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
     addStreamer("https://www.twitch.tv/seriesofblurs", "seriesofblurs", false, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
+    dynamicInputs();
+    dynamicHeaders();
+    dynamicShadows();
 }
