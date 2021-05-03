@@ -46,7 +46,8 @@ async function seedDB(){
 
         let user = await User.create({
             username: "Default",
-            streamerList: []
+            streamerList: [],
+            isAdmin: false
         });
         console.log("Default user created");
         for (const s of streamers) {

@@ -33,8 +33,14 @@
     <hr>
 <% }); %>   
 
+
+<% if(currentUser) { %>
+    <% if(currentUser.isAdmin == true) { %>
 <form action="/blog/new" method="GET">
     <input type="submit" class="btn btn-primary" value="New Post">
 </form>
+<% } %>
+<% } %>
+
 
 <%- include('../partials/footer'); -%> 
