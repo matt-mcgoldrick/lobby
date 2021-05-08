@@ -58,7 +58,7 @@ router.get("/about", function(req, res) {
 // USER ROUTES
 // ============
 //user profile
-router.get("/users/:id", function(req, res){
+router.get("/user/:id", function(req, res){
     User.findById(req.params.id, function(err, user){
         if(err) {
             console.log(err);

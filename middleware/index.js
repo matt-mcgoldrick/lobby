@@ -11,7 +11,7 @@ module.exports = {
     checkUserAuthBlog: function checkUserAuthBlog(req, res, next){
         if(req.isAuthenticated()){
             blog.findById(req.params.id, function(err, blog){
-                if(blog.author.id.equals(req.user._id)){
+                if(blog.author._id.equals(req.user._id)){
                     next();
                 } else {
                     console.log("User not authorized");
