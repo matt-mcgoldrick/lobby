@@ -15,8 +15,8 @@ var streamers = [
         isLive: "color:none"
     },
     {
-        login: "seriesofblurs",
-        url: "https://www.twitch.tv/seriesofblurs",
+        login: "gamesdonequick",
+        url: "https://www.twitch.tv/gamesdonequick",
         isLive: "color:none"
     }
 ]

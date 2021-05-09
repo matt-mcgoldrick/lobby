@@ -18,8 +18,8 @@ const streamers = [
         isLive: "color:none"
     },
     {
-        login: "cirno_tv",
-        url: "https://www.twitch.tv/cirno_tv",
+        login: "gamesdonequick",
+        url: "https://www.twitch.tv/gamesdonequick",
         isLive: "color:none"
     }
 ]
@@ -41,7 +41,9 @@ router.get("/", function(req, res){
             if(err){
                 console.log(err);
             } else {
-                checkIfLive();
+                //checkIfLive();
+                console.log("realUser.login = " + realUser.streamerList[0].login);
+                console.log("realUser.url = " + realUser.streamerList[0].url);
                 res.render("homepage", {defaultUser: realUser});
             }
         })

@@ -83,9 +83,8 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <% console.log(defaultUser); %>
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink1" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon1" style=<%=defaultUser.streamerList[0].isLive%>></i></a>
+                <a id="iconLink1" href=<%=defaultUser.streamerList[0].url%>><i class="fa fa-twitch fa-10x" id="streamerIcon1" style=<%=defaultUser.streamerList[0].isLive%>></i></a>
                 <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[0]._id%>?_method=PUT" method="POST">
                     <input type="text" id="streamerNameInput1" class="d-none align-middle" value="<%=defaultUser.streamerList[0].login%>" name="updatedStreamer"> 
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton1">Save</button>
@@ -94,7 +93,7 @@
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton1">Edit</button>
             </div> 
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink2" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon2" style=<%=defaultUser.streamerList[1].isLive%>></i></a> 
+                <a id="iconLink2" href=<%=defaultUser.streamerList[1].url%>><i class="fa fa-twitch fa-10x" id="streamerIcon2" style=<%=defaultUser.streamerList[1].isLive%>></i></a> 
                 <form action="/users/<%=defaultUser._id%>/streamers/<%=defaultUser.streamerList[1]._id%>?_method=PUT" method="POST">
                     <input type="text" id="streamerNameInput2" class="d-none align-middle" value="<%=defaultUser.streamerList[1].login%>" name="updatedStreamer">   
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton2">Save</button>
@@ -103,7 +102,7 @@
                 <button type="button" class="btn btn-outline-secondary mr-3 edit" id="editButton2">Edit</button>
             </div> 
             <div class="row streamer d-flex justify-content-around">
-                <a id="iconLink3" href=""><i class="fa fa-twitch fa-10x" id="streamerIcon3" style=<%=defaultUser.streamerList[2].isLive%>></i></a>
+                <a id="iconLink3" href=<%=defaultUser.streamerList[2].url%>> <i class="fa fa-twitch fa-10x" id="streamerIcon3" style=<%=defaultUser.streamerList[2].isLive%>> </i> </a>
                 <form action="/users/<%= defaultUser._id %>/streamers/<%=defaultUser.streamerList[2]._id %>?_method=PUT" method="POST">
                     <input type="text" id="streamerNameInput3" class="d-none align-middle" value="<%=defaultUser.streamerList[2].login%>" name="updatedStreamer">
                     <button type="submit" class="btn btn-outline-secondary mr-3 save d-none" id="saveButton3">Save</button>

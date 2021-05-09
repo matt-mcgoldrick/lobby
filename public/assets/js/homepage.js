@@ -38,17 +38,7 @@ class Streamer {
         this._edit = _edit;
         this._save = _save;
         this._input = _input;
-        this._link = _link
-
-        this._link.setAttribute("href", this.url);
-    }
-
-    // function that is called when editing a streamer
-    editStreamer(name) {
-        this.name = name;
-        this.url = "https://www.twitch.tv/" + name;
-        this._span.textContent = name;
-        this._link.setAttribute("href", this.url);
+        this._link = _link;
     }
 }
 
@@ -146,21 +136,6 @@ $(".edit").on("click", function() {
     editbutton.addClass("d-none");
 });
 
-$(".save").on("click", function() {
-    let savebutton = $(this);
-    streamerList.forEach(function(strmr) {
-        if(strmr._save.id == savebutton.attr('id')) {
-            strmr._save.classList.add("d-none");
-            strmr._span.classList.remove("d-none");
-            strmr._edit.classList.remove("d-none");
-            strmr._input.classList.add("d-none");
-            strmr.editStreamer(strmr._input.value);
-        }
-    });
-    savebutton.addClass("d-none");
-    window.location.reload();
-});
-
 $("input").on("keypress", function(e) {
     if(e.which === 13) {
         let savebutton = $(this).siblings(".save");
@@ -170,7 +145,6 @@ $("input").on("keypress", function(e) {
                 strmr._span.classList.remove("d-none");
                 strmr._edit.classList.remove("d-none");
                 strmr._input.classList.add("d-none");
-                strmr.editStreamer(strmr._input.value);
             }
         });
         savebutton.addClass("d-none");
