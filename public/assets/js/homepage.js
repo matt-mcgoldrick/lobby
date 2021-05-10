@@ -16,9 +16,6 @@ const streamerName3 = document.querySelector("#streamerName3");
 const streamerIcon1 = document.querySelector("#streamerIcon1");
 const streamerIcon2 = document.querySelector("#streamerIcon2");
 const streamerIcon3 = document.querySelector("#streamerIcon3");
-const iconLink1 = document.querySelector("#iconLink1");
-const iconLink2 = document.querySelector("#iconLink2");
-const iconLink3 = document.querySelector("#iconLink3");
 const streamerList = [];
 const editButtonList = $(".edit");
 const expandFeedButton = document.querySelector("#expandFeed");
@@ -28,7 +25,7 @@ $(function () {
   })
 
 class Streamer {
-    constructor(url, name, isLive, _icon, _span, _edit, _save, _input, _link)
+    constructor(url, name, isLive, _icon, _span, _edit, _save, _input)
     {
         this.url = url;
         this.name = name;
@@ -38,7 +35,6 @@ class Streamer {
         this._edit = _edit;
         this._save = _save;
         this._input = _input;
-        this._link = _link;
     }
 }
 
@@ -136,24 +132,9 @@ $(".edit").on("click", function() {
     editbutton.addClass("d-none");
 });
 
-$("input").on("keypress", function(e) {
-    if(e.which === 13) {
-        let savebutton = $(this).siblings(".save");
-        streamerList.forEach(function(strmr) {
-            if(strmr._save.id == savebutton.attr('id')) {
-                strmr._save.classList.add("d-none");
-                strmr._span.classList.remove("d-none");
-                strmr._edit.classList.remove("d-none");
-                strmr._input.classList.add("d-none");
-            }
-        });
-        savebutton.addClass("d-none");
-    }
-});
-
 // function that is called when adding a streamer
-function addStreamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link) {
-    let streamer = new Streamer(url, name, isLive, _icon, _span, _edit, _save, _input, _link);
+function addStreamer(url, name, isLive, _icon, _span, _edit, _save, _input) {
+    let streamer = new Streamer(url, name, isLive, _icon, _span, _edit, _save, _input);
     streamerList.push(streamer);
 }
 
@@ -167,9 +148,9 @@ $(".card").hover(
 );
 
 function init() {
-    addStreamer("https://www.twitch.tv/siritron", "siritron", false, streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1, iconLink1);
-    addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", false, streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2, iconLink2);
-    addStreamer("https://www.twitch.tv/seriesofblurs", "seriesofblurs", false, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3, iconLink3);
+    addStreamer("https://www.twitch.tv/siritron", "siritron", false, streamerIcon1, streamerName1, editButton1, saveButton1, streamerNameInput1);
+    addStreamer("https://www.twitch.tv/xcaliz0rz", "xcaliz0rz", false, streamerIcon2, streamerName2, editButton2, saveButton2, streamerNameInput2);
+    addStreamer("https://www.twitch.tv/seriesofblurs", "seriesofblurs", false, streamerIcon3, streamerName3, editButton3, saveButton3, streamerNameInput3);
     dynamicInputs();
     dynamicHeaders();
     dynamicShadows();
