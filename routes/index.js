@@ -41,9 +41,9 @@ router.get("/", function(req, res){
             if(err){
                 console.log(err);
             } else {
-                //checkIfLive();
-                console.log("realUser.login = " + realUser.streamerList[0].login);
-                console.log("realUser.url = " + realUser.streamerList[0].url);
+                checkIfLive();
+                //console.log("realUser.login = " + realUser.streamerList[0].login);
+                //console.log("realUser.url = " + realUser.streamerList[0].url);
                 res.render("homepage", {defaultUser: realUser});
             }
         })
@@ -130,8 +130,8 @@ function checkIfLive(){
 const options = {
     url: "",
     headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej',
-        'Authorization': 'Bearer yzrgoc64vaeodoluhuah3tdpw4c5pa'
+        'Client-ID': '19nzat5u7oeowbd24ebj9wkj90fesq',
+        'Authorization': 'Bearer ncfy7fgu8v3w5n58o2691lme1f7sl0'
     }    
 };
 

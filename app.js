@@ -47,51 +47,6 @@ app.use(function(req, res, next){
     next();
 });
 
-function checkIfLive(){
-    Streamer.find({}, function(err, str) {
-        if(err) {
-            console.log(err);
-        } else {
-            str.forEach(function(streamer){
-                options.url = 'https://api.twitch.tv/helix/streams?user_login=' + streamer.login;
-                request(options, callback);
-            });
-        }
-    });
-}
-
-const options = {
-    url: "",
-    headers: {
-        'Client-ID': '3m4pic0r2zccra2670ph42oh7s4oej',
-        'Authorization': 'Bearer yzrgoc64vaeodoluhuah3tdpw4c5pa'
-    }    
-};
-
-function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        const info = JSON.parse(body);
-        if (info.data.length !== 0) {
-            const query = {login: this.uri.query.substr(11)};
-            Streamer.findOneAndUpdate(query, {isLive: "color:red" }, function(err, str) {
-                if (err) {
-                    console.log(err);
-                } else {
-                }
-            });
-        }
-        else {
-            const query = {login: this.uri.query.substr(11)};
-            Streamer.findOneAndUpdate(query, {isLive: "color:none" }, function(err, str) {
-                if (err) {
-                    console.log(err);
-                } else { 
-                }
-            });
-        }
-    }
-}
-
 app.use('/blog', blogRoutes);
 app.use('/users/:id/streamers', streamerRoutes);
 app.use('/', indexRoutes);
