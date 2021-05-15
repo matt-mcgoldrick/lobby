@@ -12,8 +12,8 @@ const express = require('express'),
 const options = {
     url: "",
     headers: {
-        'Client-ID': '19nzat5u7oeowbd24ebj9wkj90fesq',
-        'Authorization': 'Bearer ncfy7fgu8v3w5n58o2691lme1f7sl0'
+        'Client-ID': process.env.CLIENT_ID,
+        'Authorization': 'Bearer ' + process.env.AUTHORIZATION
     }    
 };
 
