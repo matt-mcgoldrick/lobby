@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config();
+const result = require('dotenv').config();
 const seedDB = require("./seeds");
 const passport = require("passport");
 
