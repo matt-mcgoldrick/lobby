@@ -71,15 +71,15 @@ function dynamicShadows() {
 }
 
 function dynamicInputs() {
-    if (window.innerWidth < 768) {
-        $("input").css("font-size", "25px");
-    }
-    else if (window.innerWidth < 992) {
-        $("input").css("font-size", "18px");
-    }
-    else {
-        $("input").css("font-size", "25px");   
-    }
+        if (window.innerWidth < 768) {
+            $("input[name='UpdatedStreamer']").css("font-size", "25px");
+        }
+        else if (window.innerWidth < 992) {
+            $("input[name='UpdatedStreamer']").css("font-size", "18px");
+        }
+        else {
+            $("input[name='UpdatedStreamer']").css("font-size", "25px");   
+        }
 }
 
 function hideCardsOnSmallBreakpoint() {
