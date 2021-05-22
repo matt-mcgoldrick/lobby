@@ -42,8 +42,6 @@ router.get("/", function(req, res){
                 console.log(err);
             } else {
                 checkIfLive();
-                //console.log("realUser.login = " + realUser.streamerList[0].login);
-                //console.log("realUser.url = " + realUser.streamerList[0].url);
                 res.render("homepage", {defaultUser: realUser});
             }
         })
